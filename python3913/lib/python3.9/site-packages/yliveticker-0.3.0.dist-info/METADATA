@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: yliveticker
+Version: 0.3.0
+Summary: Live market data from Yahoo! Finance websocket
+Home-page: https://github.com/yahoofinancelive/yliveticker
+Author: Alexey Paramonov
+Author-email: yliveticker@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*
+Description-Content-Type: text/markdown
+Requires-Dist: protobuf (>=3.11.0)
+Requires-Dist: websocket-client (>=0.57.0)
+
+![Python package](https://github.com/yahoofinancelive/yliveticker/workflows/Python%20package/badge.svg)
+![Upload Python Package](https://github.com/yahoofinancelive/yliveticker/workflows/Upload%20Python%20Package/badge.svg)
+# Live from Yahoo Finance
+
+Get market data from Yahoo Finance websocket in near-real time.
+wss://streamer.finance.yahoo.com/
+
+## Setup
+```bash
+pip install yliveticker
+```
+[pypi package home](https://pypi.org/project/yliveticker/)
+
+## Example
+
+The following snippet prints out live metrics in console output. You can follow other symbols by providing them in `ticker_names`.
+
+```python
+import yliveticker
+
+
+# this function is called on each ticker update
+def on_new_msg(ws, msg):
+    print(msg)
+
+
+yliveticker.YLiveTicker(on_ticker=on_new_msg, ticker_names=[
+    "BTC=X", "^GSPC", "^DJI", "^IXIC", "^RUT", "CL=F", "GC=F", "SI=F", "EURUSD=X", "^TNX", "^VIX", "GBPUSD=X", "JPY=X", "BTC-USD", "^CMC200", "^FTSE", "^N225"])
+```
+
+**Note**
+*Check trading hours for your market if you don't observe any live metrics*
+
+
